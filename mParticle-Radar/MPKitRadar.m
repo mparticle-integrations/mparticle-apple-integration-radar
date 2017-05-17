@@ -88,6 +88,7 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
         _started = YES;
 
         if (runAutomatically) {
+            [self tryTrackOnce];
             [self tryStartTracking];
         }
 
@@ -129,6 +130,7 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
         [Radar setUserId:identityString];
 
         if (runAutomatically) {
+            [self tryTrackOnce];
             [self tryStartTracking];
         }
     }
