@@ -41,7 +41,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
 }
 
 + (void)load {
-    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Radar" className:@"MPKitRadar" startImmediately:YES];
+    MPKitRegister *kitRegister = [[MPKitRegister alloc] initWithName:@"Radar" className:@"MPKitRadar"];
     [MParticle registerExtension:kitRegister];
 }
 
@@ -66,25 +66,25 @@ NSUInteger MPKitInstanceCompanyName = 117;
 #pragma mark - MPKitInstanceProtocol methods
 
 #pragma mark Kit instance and lifecycle
-- (nonnull instancetype)initWithConfiguration:(nonnull NSDictionary *)configuration startImmediately:(BOOL)startImmediately {
-    self = [super init];
+- (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
+    MPKitExecStatus *execStatus = nil;
 
     NSString *publishableKey = configuration[KEY_PUBLISHABLE_KEY];
     runAutomatically = [(NSNumber *)configuration[KEY_RUN_AUTOMATICALLY] boolValue];
 
-    if (!self || !publishableKey) {
-        return nil;
+    if (!publishableKey) {
+        execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeRequirementsNotMet];
+        return execStatus;
     }
 
     [Radar initializeWithPublishableKey:publishableKey];
 
     _configuration = configuration;
 
-    if (startImmediately) {
-        [self start];
-    }
+    [self start];
 
-    return self;
+    execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
+    return execStatus;
 }
 
 - (void)start {
