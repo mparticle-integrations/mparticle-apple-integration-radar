@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                    = 'mParticle-Radar'
-  s.version                 = '6.15.15'
+  s.version                 = '6.15.17'
   s.summary                 = 'Radar integration for mParticle'
   s.description             = <<-DESC
                               This is the Radar integration for mParticle.
