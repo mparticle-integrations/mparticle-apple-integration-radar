@@ -94,6 +94,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
         _started = YES;
 
         if (runAutomatically) {
+            [self tryTrackOnce];
             [self tryStartTracking];
         }
 
@@ -135,6 +136,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
         [Radar setUserId:identityString];
 
         if (runAutomatically) {
+            [self tryTrackOnce];
             [self tryStartTracking];
         }
     }
