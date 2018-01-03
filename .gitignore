@@ -19,6 +19,7 @@ playground.xcworkspace
 Pods/
 Carthage/Checkouts
 Carthage/Build
+Cartfile.resolved
 **/Podfile.lock
 **/*.xcworkspace
 .DS_Store

@@ -22,6 +22,8 @@
 NSString *const KEY_PUBLISHABLE_KEY = @"publishableKey";
 NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
 
+NSUInteger MPKitInstanceCompanyName = 117;
+
 @interface MPKitRadar() {
     BOOL runAutomatically;
 }
@@ -43,18 +45,16 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
     CLAuthorizationStatus status = [Radar authorizationStatus];
     BOOL hasAuthorized = status == kCLAuthorizationStatusAuthorizedAlways;
 
-    if (hasAuthorized) {
+    if (hasAuthorized)
         [Radar startTracking];
-    }
 }
 
 - (void)tryTrackOnce {
     CLAuthorizationStatus status = [Radar authorizationStatus];
     BOOL hasAuthorized = status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse;
 
-    if (hasAuthorized) {
+    if (hasAuthorized)
         [Radar trackOnceWithCompletionHandler:nil];
-    }
 }
 
 #pragma mark - MPKitInstanceProtocol methods
@@ -66,17 +66,15 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
     NSString *publishableKey = configuration[KEY_PUBLISHABLE_KEY];
     runAutomatically = [(NSNumber *)configuration[KEY_RUN_AUTOMATICALLY] boolValue];
 
-    if (!self || !publishableKey) {
+    if (!self || !publishableKey)
         return nil;
-    }
 
     [Radar initializeWithPublishableKey:publishableKey];
 
     _configuration = configuration;
 
-    if (startImmediately) {
+    if (startImmediately)
         [self start];
-    }
 
     return self;
 }
@@ -87,10 +85,8 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
     dispatch_once(&kitPredicate, ^{
         _started = YES;
 
-        if (runAutomatically) {
-            [self tryTrackOnce];
+        if (runAutomatically)
             [self tryStartTracking];
-        }
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
@@ -106,9 +102,8 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
 #pragma mark Application
 
 - (MPKitExecStatus *)didBecomeActive {
-    if (runAutomatically) {
+    if (runAutomatically)
         [self tryTrackOnce];
-    }
 
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
@@ -116,9 +111,8 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
 #pragma mark Events
 
 - (MPKitExecStatus *)logout {
-    if (runAutomatically) {
+    if (runAutomatically)
         [Radar stopTracking];
-    }
 
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
@@ -129,10 +123,8 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
     if (identityType == MPUserIdentityCustomerId) {
         [Radar setUserId:identityString];
 
-        if (runAutomatically) {
-            [self tryTrackOnce];
+        if (runAutomatically)
             [self tryStartTracking];
-        }
     }
 
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
@@ -141,9 +133,8 @@ NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
 #pragma mark Assorted
 
 - (MPKitExecStatus *)setOptOut:(BOOL)optOut {
-    if (runAutomatically) {
+    if (runAutomatically)
         [Radar stopTracking];
-    }
 
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
