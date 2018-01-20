@@ -78,6 +78,8 @@ NSUInteger MPKitInstanceCompanyName = 117;
 
     [Radar initializeWithPublishableKey:publishableKey];
 
+    // TODO proactively get customer ID and call [Radar setUserId:customerId];?
+
     _configuration = configuration;
 
     if (startImmediately) {
@@ -132,7 +134,15 @@ NSUInteger MPKitInstanceCompanyName = 117;
 #pragma mark User attributes and identities
 
 - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
-    if (identityType == MPUserIdentityCustomerId) {
+    if (identityType == MPUserIdentityAlias) {
+        [Radar reidentifyUserFromOldUserId:identityString];
+        // TODO get new customer ID and call [Radar setUserId:customerId];?
+
+        if (runAutomatically) {
+            [self tryTrackOnce];
+            [self tryStartTracking];
+        }
+    } else if (identityType == MPUserIdentityCustomerId) {
         [Radar setUserId:identityString];
 
         if (runAutomatically) {
