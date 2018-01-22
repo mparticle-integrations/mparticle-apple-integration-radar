@@ -78,7 +78,15 @@ NSUInteger MPKitInstanceCompanyName = 117;
 
     [Radar initializeWithPublishableKey:publishableKey];
 
-    // TODO proactively get customer ID and call [Radar setUserId:customerId];?
+    for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
+        MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
+        NSString *identityString = userIdentity[kMPUserIdentityIdKey];
+
+        if (identityType == MPUserIdentityCustomerId) {
+            Radar.setUserId(userId);
+            break;
+        }
+    }
 
     _configuration = configuration;
 
@@ -136,7 +144,16 @@ NSUInteger MPKitInstanceCompanyName = 117;
 - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
     if (identityType == MPUserIdentityAlias) {
         [Radar reidentifyUserFromOldUserId:identityString];
-        // TODO get new customer ID and call [Radar setUserId:customerId];?
+
+        for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
+            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
+            NSString *identityString = userIdentity[kMPUserIdentityIdKey];
+
+            if (identityType == MPUserIdentityCustomerId) {
+                Radar.setUserId(userId);
+                break;
+            }
+        }
 
         if (runAutomatically) {
             [self tryTrackOnce];
