@@ -142,24 +142,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
 #pragma mark User attributes and identities
 
 - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
-    if (identityType == MPUserIdentityAlias) {
-        [Radar reidentifyUserFromOldUserId:identityString];
-
-        for (NSDictionary<NSString *, id> *userIdentity in self.userIdentities) {
-            MPUserIdentity identityType = (MPUserIdentity)[userIdentity[kMPUserIdentityTypeKey] integerValue];
-            NSString *identityString = userIdentity[kMPUserIdentityIdKey];
-
-            if (identityType == MPUserIdentityCustomerId) {
-                Radar.setUserId(userId);
-                break;
-            }
-        }
-
-        if (runAutomatically) {
-            [self tryTrackOnce];
-            [self tryStartTracking];
-        }
-    } else if (identityType == MPUserIdentityCustomerId) {
+    if (identityType == MPUserIdentityCustomerId) {
         [Radar setUserId:identityString];
 
         if (runAutomatically) {
