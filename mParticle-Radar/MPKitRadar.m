@@ -83,7 +83,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
         NSString *identityString = userIdentity[kMPUserIdentityIdKey];
 
         if (identityType == MPUserIdentityCustomerId) {
-            Radar.setUserId(userId);
+            [Radar setUserId:identityString];
             break;
         }
     }
