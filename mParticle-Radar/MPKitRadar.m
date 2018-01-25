@@ -23,8 +23,10 @@
 #import "RadarSDK.h"
 #endif
 
-NSString *const KEY_PUBLISHABLE_KEY = @"publishableKey";
-NSString *const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
+static NSString * const KEY_PUBLISHABLE_KEY = @"publishableKey";
+static NSString * const KEY_RUN_AUTOMATICALLY = @"runAutomatically";
+static NSString * const kMPUserIdentityTypeKey = @"n";
+static NSString * const kMPUserIdentityIdKey = @"i";
 
 NSUInteger MPKitInstanceCompanyName = 117;
 
