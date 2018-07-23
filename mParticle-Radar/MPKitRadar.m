@@ -48,7 +48,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
 }
 
 - (void)tryStartTracking {
-    CLAuthorizationStatus status = [Radar authorizationStatus];
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     BOOL hasAuthorized = status == kCLAuthorizationStatusAuthorizedAlways;
 
     if (hasAuthorized) {
@@ -57,7 +57,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
 }
 
 - (void)tryTrackOnce {
-    CLAuthorizationStatus status = [Radar authorizationStatus];
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     BOOL hasAuthorized = status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse;
 
     if (hasAuthorized) {
