@@ -1,2 +1,2 @@
 github "radarlabs/radar-sdk-ios" ~> 2.0.0
-github "mparticle/mparticle-apple-sdk" ~> 7.5.0
+github "mparticle/mparticle-apple-sdk" ~> 7.6.0
