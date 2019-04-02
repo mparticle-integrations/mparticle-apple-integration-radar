@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license                 = { :type => 'Apache 2.0', :file => 'LICENSE' }
   s.author                  = { 'mParticle' => 'support@mparticle.com' }
   s.source                  = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-radar.git", :tag => s.version.to_s }
-  s.social_media_url        = 'https://twitter.com/mparticles'
+  s.social_media_url        = 'https://twitter.com/mparticle'
   s.static_framework        = true
   s.ios.deployment_target   = '9.0'
   s.ios.source_files        = 'mParticle-Radar/*.{h,m,mm}'
