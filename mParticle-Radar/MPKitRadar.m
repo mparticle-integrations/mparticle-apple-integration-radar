@@ -91,9 +91,9 @@ NSUInteger MPKitInstanceCompanyName = 117;
     static dispatch_once_t kitPredicate;
 
     dispatch_once(&kitPredicate, ^{
-        _started = YES;
+        self->_started = YES;
 
-        if (runAutomatically) {
+        if (self->runAutomatically) {
             [self tryStartTracking];
         } else {
             [Radar stopTracking];
