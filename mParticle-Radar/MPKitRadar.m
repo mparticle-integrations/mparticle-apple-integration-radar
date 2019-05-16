@@ -94,8 +94,9 @@ NSUInteger MPKitInstanceCompanyName = 117;
         _started = YES;
 
         if (runAutomatically) {
-            [self tryTrackOnce];
             [self tryStartTracking];
+        } else {
+            [Radar stopTracking];
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
