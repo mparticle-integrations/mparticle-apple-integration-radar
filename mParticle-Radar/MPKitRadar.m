@@ -30,7 +30,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
 - (void)tryStartTracking {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     BOOL hasAuthorized = status == kCLAuthorizationStatusAuthorizedAlways;
-
+    
     if (hasAuthorized) {
         [Radar startTracking];
     }
@@ -39,7 +39,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
 - (void)tryTrackOnce {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     BOOL hasAuthorized = status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse;
-
+    
     if (hasAuthorized) {
         [Radar trackOnceWithCompletionHandler:nil];
     }
@@ -50,37 +50,37 @@ NSUInteger MPKitInstanceCompanyName = 117;
 #pragma mark Kit instance and lifecycle
 - (MPKitExecStatus *)didFinishLaunchingWithConfiguration:(NSDictionary *)configuration {
     MPKitExecStatus *execStatus = nil;
-
+    
     NSString *publishableKey = configuration[KEY_PUBLISHABLE_KEY];
     runAutomatically = [(NSNumber *)configuration[KEY_RUN_AUTOMATICALLY] boolValue];
-
+    
     if (!publishableKey) {
         execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeRequirementsNotMet];
         return execStatus;
     }
-
+    
     [Radar initializeWithPublishableKey:publishableKey];
-
+    
     _configuration = configuration;
-
+    
     [self start];
-
+    
     execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
     return execStatus;
 }
 
 - (void)start {
     static dispatch_once_t kitPredicate;
-
+    
     dispatch_once(&kitPredicate, ^{
         self->_started = YES;
-
+        
         if (self->runAutomatically) {
             [self tryStartTracking];
         } else {
             [Radar stopTracking];
         }
-
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification object:nil userInfo:userInfo];
@@ -98,7 +98,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
     if (runAutomatically) {
         [self tryTrackOnce];
     }
-
+    
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
 
@@ -108,7 +108,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
     if (runAutomatically) {
         [Radar stopTracking];
     }
-
+    
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
 
@@ -117,13 +117,13 @@ NSUInteger MPKitInstanceCompanyName = 117;
 - (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
     if (identityType == MPUserIdentityCustomerId) {
         [Radar setUserId:identityString];
-
+        
         if (runAutomatically) {
             [self tryTrackOnce];
             [self tryStartTracking];
         }
     }
-
+    
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
 
@@ -133,7 +133,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
     if (runAutomatically) {
         [Radar stopTracking];
     }
-
+    
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
 
