@@ -60,6 +60,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
     }
     
     [Radar initializeWithPublishableKey:publishableKey];
+    [Radar setAdIdEnabled:true];
     
     _configuration = configuration;
     
