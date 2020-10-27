@@ -126,9 +126,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
 
 - (void)setRadarUserId:(FilteredMParticleUser *)user {
     NSString *customerId = [user.userIdentities objectForKey:[NSNumber numberWithInt:MPUserIdentityCustomerId]];
-    if (customerId) {
-        [Radar setUserId:customerId];
-    }
+    [Radar setUserId:customerId];
 }
 
 - (void)setUserAndTrack:(FilteredMParticleUser *)user  {
