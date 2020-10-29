@@ -77,8 +77,10 @@ NSUInteger MPKitInstanceCompanyName = 117;
         
         FilteredMParticleUser *user = [[self kitApi] getCurrentUserWithKit:self];
         NSString *mpId = [self getMpId:user];
-        [self setRadarMetadata:mpId];
-        
+        if (mpId != nil) {
+            NSDictionary *metadata = @{@"mParticleId": mpId};
+            [Radar setMetadata:metadata];
+        }
         if (self->runAutomatically) {
             [self tryStartTracking];
         } else {
