@@ -75,6 +75,10 @@ NSUInteger MPKitInstanceCompanyName = 117;
     dispatch_once(&kitPredicate, ^{
         self->_started = YES;
         
+        FilteredMParticleUser *user = [[self kitApi] getCurrentUserWithKit:self];
+        NSString *mpId = [self getMpId:user];
+        [self setRadarMetadata:mpId];
+        
         if (self->runAutomatically) {
             [self tryStartTracking];
         } else {
@@ -86,6 +90,14 @@ NSUInteger MPKitInstanceCompanyName = 117;
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification object:nil userInfo:userInfo];
         });
     });
+}
+
+- (MPKitAPI *)kitApi {
+    if (_kitApi == nil) {
+        _kitApi = [[MPKitAPI alloc] init];
+    }
+    
+    return _kitApi;
 }
 
 - (id const)providerKitInstance {

@@ -12,5 +12,6 @@
 @property (nonatomic, unsafe_unretained, readonly) BOOL started;
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, id> *userAttributes;
 @property (nonatomic, strong, nullable) NSArray<NSDictionary<NSString *, id> *> *userIdentities;
+@property (nonatomic, strong, nullable) MPKitAPI *kitApi;
 
 @end
