@@ -66,8 +66,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
     
     [self start];
     
-    execStatus = [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
-    return execStatus;
+    return [[MPKitExecStatus alloc] initWithSDKCode:[[self class] kitCode] returnCode:MPKitReturnCodeSuccess];
 }
 
 - (void)start {
@@ -76,6 +75,12 @@ NSUInteger MPKitInstanceCompanyName = 117;
     dispatch_once(&kitPredicate, ^{
         self->_started = YES;
         
+        FilteredMParticleUser *user = [[self kitApi] getCurrentUserWithKit:self];
+        NSString *mpId = [self getMpId:user];
+        if (mpId != nil) {
+            NSDictionary *metadata = @{@"mParticleId": mpId};
+            [Radar setMetadata:metadata];
+        }
         if (self->runAutomatically) {
             [self tryStartTracking];
         } else {
@@ -87,6 +92,14 @@ NSUInteger MPKitInstanceCompanyName = 117;
             [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification object:nil userInfo:userInfo];
         });
     });
+}
+
+- (MPKitAPI *)kitApi {
+    if (_kitApi == nil) {
+        _kitApi = [[MPKitAPI alloc] init];
+    }
+    
+    return _kitApi;
 }
 
 - (id const)providerKitInstance {
@@ -103,28 +116,60 @@ NSUInteger MPKitInstanceCompanyName = 117;
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
 
-#pragma mark Events
+#pragma mark User attributes and identities
 
-- (MPKitExecStatus *)logout {
-    if (runAutomatically) {
-        [Radar stopTracking];
+- (NSString*)getMpId:(FilteredMParticleUser *)user {
+    if (user != nil && user.userId != nil && user.userId.integerValue != 0) {
+        return [user.userId stringValue];
+    } else {
+        return nil;
     }
-    
+}
+
+- (void)setRadarMetadata:(NSString *)mpId {
+    if ([Radar getMetadata] != nil) {
+        NSMutableDictionary *metadata = [[Radar getMetadata] mutableCopy];
+        [metadata setObject:mpId forKey:@"mParticleId"];
+        [Radar setMetadata:metadata];
+    }
+    else {
+        NSDictionary *metadata = @{@"mParticleId": mpId};
+        [Radar setMetadata:metadata];
+    }
+}
+
+- (void)setRadarUserId:(FilteredMParticleUser *)user {
+    NSString *customerId = [user.userIdentities objectForKey:[NSNumber numberWithInt:MPUserIdentityCustomerId]];
+    [Radar setUserId:customerId];
+}
+
+- (void)setUserAndTrack:(FilteredMParticleUser *)user  {
+    NSString *mpId = [self getMpId:user];
+    [self setRadarMetadata:mpId];
+    [self setRadarUserId:user];
+    if (runAutomatically) {
+        [self tryTrackOnce];
+        [self tryStartTracking];
+    }
+}
+
+- (MPKitExecStatus *)onLoginComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    [self setUserAndTrack:user];
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
 
-#pragma mark User attributes and identities
+- (MPKitExecStatus *)onLogoutComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    [self setUserAndTrack:user];
+    return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
+}
 
-- (MPKitExecStatus *)setUserIdentity:(NSString *)identityString identityType:(MPUserIdentity)identityType {
-    if (identityType == MPUserIdentityCustomerId) {
-        [Radar setUserId:identityString];
-        
-        if (runAutomatically) {
-            [self tryTrackOnce];
-            [self tryStartTracking];
-        }
-    }
-    
+- (MPKitExecStatus *)onIdentifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    [self setUserAndTrack:user];
+    return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
+}
+
+- (MPKitExecStatus *)onModifyComplete:(FilteredMParticleUser *)user request:(FilteredMPIdentityApiRequest *)request {
+    [self setUserAndTrack:user];
     return [[MPKitExecStatus alloc] initWithSDKCode:[MPKitRadar kitCode] returnCode:MPKitReturnCodeSuccess];
 }
 
