@@ -73,8 +73,6 @@ NSUInteger MPKitInstanceCompanyName = 117;
     static dispatch_once_t kitPredicate;
     
     dispatch_once(&kitPredicate, ^{
-        self->_started = YES;
-        
         FilteredMParticleUser *user = [[self kitApi] getCurrentUserWithKit:self];
         NSString *mpId = [self getMpId:user];
         if (mpId != nil) {
@@ -86,11 +84,13 @@ NSUInteger MPKitInstanceCompanyName = 117;
         } else {
             [Radar stopTracking];
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
-            [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification object:nil userInfo:userInfo];
-        });
+    });
+    
+    self->_started = YES;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary *userInfo = @{mParticleKitInstanceKey:[[self class] kitCode]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:mParticleKitDidBecomeActiveNotification object:nil userInfo:userInfo];
     });
 }
 
