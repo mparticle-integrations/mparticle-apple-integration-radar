@@ -24,3 +24,4 @@ Cartfile.resolved
 **/*.xcworkspace
 **/*.DS_Store
 *.DS_Store
+**/Package.resolved

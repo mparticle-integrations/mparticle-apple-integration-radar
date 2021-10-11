@@ -32,7 +32,7 @@ NSUInteger MPKitInstanceCompanyName = 117;
     BOOL hasAuthorized = status == kCLAuthorizationStatusAuthorizedAlways;
     
     if (hasAuthorized) {
-        [Radar startTrackingWithOptions:RadarTrackingOptions.efficient];
+        [Radar startTrackingWithOptions:RadarTrackingOptions.presetEfficient];
     }
 }
 
