@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "mParticle-Apple-SDK",
+        "repositoryURL": "https://github.com/mParticle/mparticle-apple-sdk",
+        "state": {
+          "branch": null,
+          "revision": "4ac987441b7f5d7b2cb18ccd740354f11c90b645",
+          "version": "8.5.4"
+        }
+      },
+      {
+        "package": "RadarSDK",
+        "repositoryURL": "https://github.com/radarlabs/radar-sdk-ios",
+        "state": {
+          "branch": null,
+          "revision": "c358d2bab9a3fbf9906569e3c22ab808bcc059c1",
+          "version": "3.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
