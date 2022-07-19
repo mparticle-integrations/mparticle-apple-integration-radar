@@ -4,16 +4,16 @@ This repository contains the [Radar](https://www.radar.io) integration for the [
 
 ### Adding the integration
 
-1. Add the kit dependency to your app's Podfile or Cartfile:
+1. Add the kit dependency via SPM or to your app's Podfile or Cartfile:
 
     ```
-    pod 'mParticle-Radar', '~> 8.0.2'
+    pod 'mParticle-Radar', '~> 8.0'
     ```
 
     OR
 
     ```
-    github "mparticle-integrations/mparticle-apple-integration-radar" ~> 8.0.2
+    github "mparticle-integrations/mparticle-apple-integration-radar" ~> 8.0
     ```
 
 2. Follow the mParticle iOS SDK [quick-start](https://github.com/mParticle/mparticle-apple-sdk), then rebuild and launch your app, and verify that you see `"Included kits: { Radar }"` in your Xcode console 
