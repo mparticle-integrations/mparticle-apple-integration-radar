@@ -15,7 +15,7 @@ let package = Package(
                .upToNextMajor(from: "8.0.0")),
       .package(name: "RadarSDK",
                url: "https://github.com/radarlabs/radar-sdk-ios",
-               .upToNextMajor(from: "3.2.0")),
+               .upToNextMinor(from: "3.4.0")),
     ],
     targets: [
         .target(

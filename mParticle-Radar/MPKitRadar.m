@@ -1,8 +1,8 @@
 #import "MPKitRadar.h"
-#if defined(__has_include) && __has_include(<RadarSDK/RadarSDK.h>)
-#import <RadarSDK/RadarSDK.h>
+#if defined(__has_include) && __has_include(<RadarSDK/Include/Radar.h>)
+#import <RadarSDK/Include/Radar.h>
 #else
-#import "RadarSDK.h"
+#import "Radar.h"
 #endif
 
 NSString *const KEY_PUBLISHABLE_KEY = @"publishableKey";
