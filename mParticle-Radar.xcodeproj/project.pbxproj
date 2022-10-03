@@ -3,25 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB695FB31F5F549A00A7F4CF /* RadarSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB695FB21F5F549A00A7F4CF /* RadarSDK.framework */; };
+		964D288B28DBFA1100D69399 /* mParticle_Apple_SDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 964D288928DBFA1100D69399 /* mParticle_Apple_SDK.xcframework */; };
+		964D288C28DBFA1100D69399 /* RadarSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 964D288A28DBFA1100D69399 /* RadarSDK.xcframework */; };
 		DB7E05A61CB819D300967FDF /* MPKitRadar.h in Headers */ = {isa = PBXBuildFile; fileRef = DB7E05A41CB819D300967FDF /* MPKitRadar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB7E05A71CB819D300967FDF /* MPKitRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7E05A51CB819D300967FDF /* MPKitRadar.m */; };
 		DB9401701CB703F2007ABB18 /* mParticle_Radar.h in Headers */ = {isa = PBXBuildFile; fileRef = DB94016F1CB703F2007ABB18 /* mParticle_Radar.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DB94017A1CB70C58007ABB18 /* mParticle_Apple_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9401781CB70C58007ABB18 /* mParticle_Apple_SDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DB695FB21F5F549A00A7F4CF /* RadarSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RadarSDK.framework; path = Carthage/Build/iOS/RadarSDK.framework; sourceTree = "<group>"; };
+		964D288928DBFA1100D69399 /* mParticle_Apple_SDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = mParticle_Apple_SDK.xcframework; path = Carthage/Build/mParticle_Apple_SDK.xcframework; sourceTree = "<group>"; };
+		964D288A28DBFA1100D69399 /* RadarSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RadarSDK.xcframework; path = Carthage/Build/RadarSDK.xcframework; sourceTree = "<group>"; };
 		DB7E05A41CB819D300967FDF /* MPKitRadar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitRadar.h; sourceTree = "<group>"; };
 		DB7E05A51CB819D300967FDF /* MPKitRadar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitRadar.m; sourceTree = "<group>"; };
 		DB94016C1CB703F2007ABB18 /* mParticle_Radar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = mParticle_Radar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB94016F1CB703F2007ABB18 /* mParticle_Radar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mParticle_Radar.h; sourceTree = "<group>"; };
 		DB9401711CB703F2007ABB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DB9401781CB70C58007ABB18 /* mParticle_Apple_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = mParticle_Apple_SDK.framework; path = Carthage/Build/iOS/mParticle_Apple_SDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,8 +29,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB695FB31F5F549A00A7F4CF /* RadarSDK.framework in Frameworks */,
-				DB94017A1CB70C58007ABB18 /* mParticle_Apple_SDK.framework in Frameworks */,
+				964D288B28DBFA1100D69399 /* mParticle_Apple_SDK.xcframework in Frameworks */,
+				964D288C28DBFA1100D69399 /* RadarSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +40,8 @@
 		DB9401621CB703F2007ABB18 = {
 			isa = PBXGroup;
 			children = (
-				DB695FB21F5F549A00A7F4CF /* RadarSDK.framework */,
-				DB9401781CB70C58007ABB18 /* mParticle_Apple_SDK.framework */,
+				964D288928DBFA1100D69399 /* mParticle_Apple_SDK.xcframework */,
+				964D288A28DBFA1100D69399 /* RadarSDK.xcframework */,
 				DB94016E1CB703F2007ABB18 /* mParticle-Radar */,
 				DB94016D1CB703F2007ABB18 /* Products */,
 			);
@@ -278,12 +278,16 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/",
 				);
 				INFOPLIST_FILE = "mParticle-Radar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Radar";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -300,12 +304,16 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/",
 				);
 				INFOPLIST_FILE = "mParticle-Radar/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mparticle.mParticle-Radar";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

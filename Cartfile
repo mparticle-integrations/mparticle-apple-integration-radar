@@ -1,2 +1,2 @@
-github "radarlabs/radar-sdk-ios" ~> 3.4
+github "radarlabs/radar-sdk-ios" ~> 3.5.0
 github "mparticle/mparticle-apple-sdk" ~> 8.0
