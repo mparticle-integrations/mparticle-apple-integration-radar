@@ -17,7 +17,5 @@ Pod::Spec.new do |s|
   s.ios.dependency          'mParticle-Apple-SDK/mParticle', '~> 8.0'
   s.ios.dependency          'RadarSDK', '~> 3.4.4'
   s.ios.pod_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/RadarSDK/**',
-                                'OTHER_LDFLAGS' => '$(inherited) -framework "RadarSDK"',
-				'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  s.ios.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+                                'OTHER_LDFLAGS' => '$(inherited) -framework "RadarSDK"' }
 end
