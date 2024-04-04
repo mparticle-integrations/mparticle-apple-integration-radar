@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53E9ACCF2BBF198F0062A03A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 53E9ACCE2BBF198F0062A03A /* PrivacyInfo.xcprivacy */; };
 		DB695FB31F5F549A00A7F4CF /* RadarSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB695FB21F5F549A00A7F4CF /* RadarSDK.framework */; };
 		DB7E05A61CB819D300967FDF /* MPKitRadar.h in Headers */ = {isa = PBXBuildFile; fileRef = DB7E05A41CB819D300967FDF /* MPKitRadar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB7E05A71CB819D300967FDF /* MPKitRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7E05A51CB819D300967FDF /* MPKitRadar.m */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		53E9ACCE2BBF198F0062A03A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		DB695FB21F5F549A00A7F4CF /* RadarSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RadarSDK.framework; path = Carthage/Build/iOS/RadarSDK.framework; sourceTree = "<group>"; };
 		DB7E05A41CB819D300967FDF /* MPKitRadar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPKitRadar.h; sourceTree = "<group>"; };
 		DB7E05A51CB819D300967FDF /* MPKitRadar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPKitRadar.m; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				DB7E05A41CB819D300967FDF /* MPKitRadar.h */,
 				DB7E05A51CB819D300967FDF /* MPKitRadar.m */,
 				DB94016F1CB703F2007ABB18 /* mParticle_Radar.h */,
+				53E9ACCE2BBF198F0062A03A /* PrivacyInfo.xcprivacy */,
 				DB9401711CB703F2007ABB18 /* Info.plist */,
 			);
 			path = "mParticle-Radar";
@@ -137,6 +140,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53E9ACCF2BBF198F0062A03A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
