@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.ios.source_files        = 'mParticle-Radar/*.{h,m,mm}'
   s.ios.frameworks          = 'CoreLocation'
   s.ios.dependency          'mParticle-Apple-SDK/mParticle', '~> 8.0'
-  s.ios.dependency          'RadarSDK', '~> 3.9.6'
+  s.ios.dependency          'RadarSDK', '~> 3.9'
   s.ios.pod_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/RadarSDK/**',
                                 'OTHER_LDFLAGS' => '$(inherited) -framework "RadarSDK"' }
 end
