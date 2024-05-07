@@ -1,6 +1,6 @@
 #import "MPKitRadar.h"
-#if defined(__has_include) && __has_include(<RadarSDK/Include/Radar.h>)
-#import <RadarSDK/Include/Radar.h>
+#if defined(__has_include) && __has_include(<RadarSDK/Radar.h>)
+#import <RadarSDK/Radar.h>
 #else
 #import "Radar.h"
 #endif
