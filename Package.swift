@@ -12,10 +12,10 @@ let package = Package(
     dependencies: [
       .package(name: "mParticle-Apple-SDK",
                url: "https://github.com/mParticle/mparticle-apple-sdk",
-               .upToNextMajor(from: "8.0.0")),
+               .upToNextMajor(from: "8.22.0")),
       .package(name: "RadarSDK",
-               url: "https://github.com/radarlabs/radar-sdk-ios",
-               .upToNextMinor(from: "3.9.6")),
+               url: "https://github.com/radarlabs/radar-sdk-ios-spm",
+               .upToNextMinor(from: "3.10.0")),
     ],
     targets: [
         .target(
@@ -25,6 +25,7 @@ let package = Package(
                 .product(name: "RadarSDK", package: "RadarSDK")
             ],
             path: "mParticle-Radar",
+            resources: [.process("PrivacyInfo.xcprivacy")],
             publicHeadersPath: "."),
     ]
 )

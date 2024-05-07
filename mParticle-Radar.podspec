@@ -11,11 +11,10 @@ Pod::Spec.new do |s|
     s.source                  = { :git => "https://github.com/mparticle-integrations/mparticle-apple-integration-radar.git", :tag => "v" + s.version.to_s }
     s.social_media_url        = 'https://twitter.com/mparticle'
     s.static_framework        = true
+
     s.ios.deployment_target   = '10.0'
     s.ios.source_files        = 'mParticle-Radar/*.{h,m,mm}'
-    s.ios.frameworks          = 'CoreLocation'
-    s.ios.dependency          'mParticle-Apple-SDK/mParticle', '~> 8.0'
-    s.ios.dependency          'RadarSDK', '~> 3.9'
-    s.ios.pod_target_xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/RadarSDK/**',
-                                  'OTHER_LDFLAGS' => '$(inherited) -framework "RadarSDK"' }
+    s.ios.resource_bundles  = { 'mParticle-Radar-Privacy' => ['mParticle-Radar/PrivacyInfo.xcprivacy'] }
+    s.ios.dependency          'mParticle-Apple-SDK/mParticle', '~> 8.22'
+    s.ios.dependency          'RadarSDK', '~> 3.10'
 end
