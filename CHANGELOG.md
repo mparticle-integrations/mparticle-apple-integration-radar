@@ -1,3 +1,10 @@
+# [8.2.0](https://github.com/mparticle-integrations/mparticle-apple-integration-radar/compare/v8.1.0...v8.2.0) (2024-05-07)
+
+
+### Features
+
+* Improve Privacy Manifest support for iOS 17 ([#29](https://github.com/mparticle-integrations/mparticle-apple-integration-radar/issues/29)) ([16952a5](https://github.com/mparticle-integrations/mparticle-apple-integration-radar/commit/16952a591d7b6a9fa7ed3f870328d555e9e77af7))
+
 # [8.1.0](https://github.com/mparticle-integrations/mparticle-apple-integration-radar/compare/v8.0.6...v8.1.0) (2024-04-10)
 
 
